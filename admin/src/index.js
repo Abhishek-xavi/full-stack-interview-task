@@ -2,6 +2,7 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const config = require("config")
 const request = require("request")
+const {generateReport} = require("./controllers/reportController")
 
 const app = express()
 
@@ -16,6 +17,23 @@ app.get("/investments/:id", (req, res) => {
     } else {
       res.send(investments)
     }
+  })
+})
+
+app.get("/generate-csv", (req, res) => {
+  generateReport(csvData => {
+    // Post CSV data to investments service
+    request.post({
+      url: `${config.investmentsServiceUrl}/investments/export`,
+      json: {csv: csvData},
+      headers: {"Content-Type": "application/json"},
+    }, (err) => {
+      if (err) {
+        console.error("Error exporting CSV:", err)
+        return res.status(500).send("Error exporting CSV")
+      }
+      res.type("text/csv").send(csvData)
+    })
   })
 })
 
