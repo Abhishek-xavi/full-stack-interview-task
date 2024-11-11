@@ -79,3 +79,53 @@ Financial Companies - localhost:8082
 
 Admin - localhost:8083
 - `/investments/:id` get an investment record by id
+
+
+## Setting up the CSV generation microservice in the Admin folder
+
+Defined the api service in admin/index.js
+
+- `/generate-csv` Generates a CSV report of investor holdings
+
+### Setting up controller for Admin service
+
+Define a reportController to handle business logic for generating reports for invester holdings.
+
+- `generateReport` The function sends invester and companies data to the generateInvesterHolding function in the utility folder.
+
+### Setting up utility for Admin service
+
+- `generateInvesterHolding` The function is defined in the utility folder and generates the report in csv format for invester holdings.
+
+
+
+## Running Tests
+
+To run the unit tests using jest, execute the following command in your terminal:
+
+```bash
+npm test
+
+
+
+
+### Addressing Task Questions
+
+#### How might you make this service more secure?
+1. **Input Validation**: Ensure that all incoming data is validated and sanitized to prevent attacks.
+2. **Authentication and Authorization**: Implement robust authentication ( e.g., JWT tokens ) and authorization mechanisms to control access to the API endpoints.
+3. **Rate Limiting**: Apply rate limiting to prevent abuse of your API.
+4. **HTTPS**: Ensure that all communications with the API are conducted over HTTPS to encrypt data in transit.
+
+#### How would you make this solution scale to millions of records?
+1. **Database Optimization**: Use indexing on frequently queried fields in your database to speed up read operations.
+2. **Pagination**: Implement pagination for any endpoints that return lists of records to avoid loading too much data at once.
+3. **Caching**: Utilize caching strategies to store frequently accessed data and reduce database load.
+4. **Load Balancing**: Use load balancers to distribute incoming traffic across multiple instances of your application.
+
+#### What else would you have liked to improve given more time?
+
+1. **Custom Reports**: Allow users to customize their reports by selecting specific metrics or time periods they are interested in.
+2. **Alerts**: Set up alerts that would interest an invester like stock alerts, investment thresholds.
+3. **Dashboard**: Incorporate data visualization tools ( like charts and graphs ) to help users quickly understand trends and make data-driven decisions.
+
