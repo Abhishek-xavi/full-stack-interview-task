@@ -30,8 +30,6 @@ describe("generateInvesterHolding", () => {
                                    "Sheila Aussie|undefined|Company B|14000.00\n"
 
     const result = generateInvesterHolding(investments, companiesMap)
-    console.log("Result:", result)
-    console.log("Expected:", expectedCSVOutput)
     expect(result).toBe(expectedCSVOutput)
   })
 })
